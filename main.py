@@ -1,15 +1,12 @@
-
 import joblib
 from keras.models import load_model
 from flask import Flask, render_template, request
-
 
 import string
 
 import pandas as pd
 
-from nltk.corpus import stopwords
-", ".join(stopwords.words('english'))
+
 
 model, X_train, y_train = joblib.load('model.h5')
 scaler = joblib.load('tfidf.joblib')
@@ -25,10 +22,10 @@ def remove_punctuation(texts):
     PUNCT_TO_REMOVE = string.punctuation
     return texts.translate(str.maketrans('', '', PUNCT_TO_REMOVE))
 
-def remove_stopwords(texts):
-    """custom function to remove the stopwords"""
-    STOPWORDS = set(stopwords.words('english'))
-    return " ".join([word for word in str(texts).split() if word not in STOPWORDS])
+# def remove_stopwords(texts):
+#     """custom function to remove the stopwords"""
+#     STOPWORDS = set(stopwords.words('english'))
+#     return " ".join([word for word in str(texts).split() if word not in STOPWORDS])
 
 def preprocess_text(texts):
     texts = to_lower_case(texts)
